@@ -1,75 +1,69 @@
-# React + TypeScript + Vite
+# Podcaster
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+SPA de podcasts desarrollada como prueba técnica. Permite explorar los 100 podcasts más populares, ver el detalle de cada uno y escuchar sus episodios.
 
-Currently, two official plugins are available:
+**Demo:** https://luisbc.github.io/podcaster/
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+> **Nota:** La aplicación usa [allorigins.win](https://allorigins.win) como proxy CORS para acceder a la API de iTunes, que no incluye cabeceras CORS en sus respuestas. Este servicio es gratuito y puede presentar errores intermitentes (408, 500, 522) ajenos a la aplicación. Si la app no carga, espera unos segundos y recarga la página.
 
-## React Compiler
+---
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Requisitos
 
-## Expanding the ESLint configuration
+- Node.js 20+
+- npm 9+
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Instalación
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
-
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
+```bash
+npm install
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Modo development
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Sirve los assets sin minimizar con HMR:
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-
+```bash
+npm run dev
 ```
+
+La app estará disponible en `http://localhost:5173/podcaster/`.
+
+## Modo production
+
+Compila y minimiza los assets:
+
+```bash
+npm run build
+```
+
+Para previsualizar el build de producción localmente:
+
+```bash
+npm run preview
+```
+
+La app estará disponible en `http://localhost:4173/podcaster/`.
+
+## Tests
+
+```bash
+npm test
+```
+
+## Stack técnico
+
+- **React 19** + **TypeScript** + **Vite**
+- **React Router v7** — navegación client-side con URLs limpias (sin hash)
+- **CSS Modules** — estilos encapsulados por componente
+- **DOMPurify** — sanitización de HTML en descripciones de episodios
+- **Jest** + **React Testing Library** — 37 tests
+
+## Decisiones técnicas
+
+- **Caché en localStorage** con TTL de 24h para evitar peticiones repetidas a la API
+- **AbortController** en los hooks de datos para cancelar peticiones al desmontar el componente
+- **React.lazy + Suspense** para code splitting por ruta
+- **allorigins.win** como proxy CORS (indicado en el enunciado de la prueba)
+
+
