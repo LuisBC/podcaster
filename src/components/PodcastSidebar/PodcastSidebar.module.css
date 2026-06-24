@@ -54,3 +54,13 @@
   display: -webkit-box;
   -webkit-box-orient: vertical;
 }
+
+.nameLink {
+  text-decoration: none;
+  color: inherit;
+  text-align: center;
+}
+
+.nameLink:hover .name {
+  color: var(--color-primary);
+}
