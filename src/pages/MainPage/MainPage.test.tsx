@@ -107,10 +107,12 @@ describe('MainPage', () => {
   })
 
   it('shows error message when fetch fails', async () => {
+    const consoleSpy = jest.spyOn(console, 'error').mockImplementation(() => {})
     fetchMock.mockRejectedValue(new Error('Network error'))
     renderMainPage()
     await waitFor(() => {
       expect(screen.getByRole('alert')).toBeInTheDocument()
     })
+    consoleSpy.mockRestore()
   })
 })
