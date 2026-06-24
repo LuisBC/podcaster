@@ -1,0 +1,15 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Podcaster</title>
+    <script>
+      // SPA redirect for GitHub Pages
+      // Stores the current path in sessionStorage and redirects to the root
+      var path = window.location.pathname.replace('/podcaster', '') || '/'
+      sessionStorage.setItem('redirect', path)
+      window.location.replace('/podcaster/')
+    </script>
+  </head>
+  <body></body>
+</html>
