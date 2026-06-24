@@ -9,7 +9,7 @@ const TOP_PODCASTS_ENDPOINT =
   'https://itunes.apple.com/us/rss/toppodcasts/limit=100/genre=1310/json'
 
 const PODCAST_DETAIL_ENDPOINT = (id: string) =>
-  `https://itunes.apple.com/lookup?media=podcast&entity=podcastEpisode&id=${id}`
+  `https://itunes.apple.com/lookup?media=podcast&entity=podcastEpisode&id=${id}&limit=200`
 
 export const TOP_PODCASTS_URL = `${PROXY_BASE}${encodeURIComponent(TOP_PODCASTS_ENDPOINT)}`
 
