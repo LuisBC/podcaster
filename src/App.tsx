@@ -1,13 +1,23 @@
 import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import { Header } from '@/components/Header/Header'
+import { LoadingBar } from '@/components/LoadingBar/LoadingBar'
+import { MainPage } from '@/pages/MainPage/MainPage'
 
 function App() {
   return (
     <BrowserRouter>
-      <Routes>
-        <Route path="/" element={<div>Main</div>} />
-        <Route path="/podcast/:podcastId" element={<div>Podcast Detail</div>} />
-        <Route path="/podcast/:podcastId/episode/:episodeId" element={<div>Episode Detail</div>} />
-      </Routes>
+      <LoadingBar />
+      <Header />
+      <main>
+        <Routes>
+          <Route path="/" element={<MainPage />} />
+          <Route path="/podcast/:podcastId" element={<div>Podcast Detail</div>} />
+          <Route
+            path="/podcast/:podcastId/episode/:episodeId"
+            element={<div>Episode Detail</div>}
+          />
+        </Routes>
+      </main>
     </BrowserRouter>
   )
 }
