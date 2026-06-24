@@ -38,6 +38,7 @@ export function usePodcastDetail(podcastId: string) {
         setEpisodes(eps)
       } catch (err) {
         if ((err as Error).name === 'AbortError') return
+        console.error(err)
         setError('Error loading podcast detail')
       } finally {
         if (!controller.signal.aborted) setIsLoading(false)

@@ -28,6 +28,7 @@ export function useTopPodcasts() {
         setPodcasts(entries)
       } catch (err) {
         if ((err as Error).name === 'AbortError') return
+        console.error(err)
         setError('Error loading podcasts')
       } finally {
         if (!controller.signal.aborted) setIsLoading(false)
